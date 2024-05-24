@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.c"
+#include "philo.h"
 
 void	error_exit(const char *error_msg)
 {
-	printf(RED "$\n" RST, error_msg);
+	printf(RED "%s\n" RST, error_msg);
 	exit(EXIT_FAILURE);
 }
-

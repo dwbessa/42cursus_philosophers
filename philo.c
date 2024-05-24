@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	if (ac == 5)
+	if (ac == 5 || ac == 6)
 	{
 		//✅ correct input
 		//1) errors checking
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 
 		//2) creating the thing
 		data_init(&table);
-		
+
 		//3) the dinner
 		dinner_start(&table);
 
@@ -32,7 +32,6 @@ int	main(int ac, char **av)
 	else
 	{
 		error_exit("🚨 Wrong number of arguments\n"
-			GREEN"Correct is ./philo 5 800 200 200 [5]"RST);
+			GREEN"Correct is ./philo 5 800 200 200 [5]\n" RST);
 	}
 }
-

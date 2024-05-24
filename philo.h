@@ -61,7 +61,7 @@ struct s_table
 	bool	end_simulation;
 	t_fork	*forks;
 	t_philo	*philos;
-}				t_table;
+};
 
 void	error_exit(const char *error_msg);
 #endif
