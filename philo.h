@@ -64,4 +64,5 @@ struct s_table
 };
 
 void	error_exit(const char *error_msg);
+void    parse_input(t_table *table, char **av);
 #endif
