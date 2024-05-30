@@ -21,16 +21,14 @@
 # include <stdbool.h>
 # include <limits.h>
 
-//YouTube Oceano
-
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
 # define YELLOW  "\x1b[33m"
 # define CYAN    "\x1b[36m"
 # define RST   "\x1b[0m"
 
-typedef pthread_mutex_t t_mtx;
-typedef	struct s_table t_table;
+typedef pthread_mutex_t	t_mtx;
+typedef struct s_table	t_table;
 
 typedef struct s_fork
 {
@@ -64,5 +62,7 @@ struct s_table
 };
 
 void	error_exit(const char *error_msg);
-void    parse_input(t_table *table, char **av);
+void	parse_input(t_table *table, char **av);
+void	data_init(t_table *table);
+
 #endif
