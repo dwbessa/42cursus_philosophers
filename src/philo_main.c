@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:59:37 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 15:28:24 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 19:53:07 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int ac, char **av)
 
 	i = -1;
 	dinner = true;
+	pthread_mutex_init(&table.mutex, NULL);
+	pthread_mutex_init(&table.print_mtx, NULL);
 	if (ac == 5 || ac == 6)
 	{
 		parse_input(&table, av);

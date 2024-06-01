@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:48:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 16:51:48 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 17:34:53 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ struct s_table
 	long	start_simulation;
 	t_bool	end_simulation;
 	t_fork	*forks;
+	t_mtx	mutex;
+	t_mtx	print_mtx;
 	t_philo	*philos;
 };
 

@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:01:23 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 16:52:46 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 17:53:33 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ void	print_status(t_philo *philo, t_status status)
 {
 	long	now;
 
+	pthread_mutex_lock(&philo->table->print_mtx);
 	now = get_time() - philo->table->start_simulation;
 	if (status == DEAD)
 		printf(RED"%ld %d died\n"RST, now, philo->id);
 	if (philo->table->end_simulation)
+	{
+		pthread_mutex_unlock(&philo->table->print_mtx);
 		return ;
+	}
 	if (status == SLEEP)
 		printf("%ld %d is sleeping\n", now, philo->id);
 	if (status == FORK)
@@ -43,4 +47,5 @@ void	print_status(t_philo *philo, t_status status)
 		printf("%ld %d is eating\n", now, philo->id);
 	if (status == THINK)
 		printf("%ld %d is thinking\n", now, philo->id);
+	pthread_mutex_unlock(&philo->table->print_mtx);
 }

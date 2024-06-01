@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:29:00 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 12:49:57 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 17:35:37 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,13 @@ static int	init_threads(t_table *table)
 	int		i;
 	t_philo	*sopher;
 
-	i = 0;
+	i = -1;
 	sopher = table->philos;
 	table->start_simulation = get_time();
-	while (i < table->phi_nbr)
+	while (++i < table->phi_nbr)
 	{
 		if (pthread_create(&sopher[i].thread_id, NULL, dinner, &sopher[i]))
 			return (-1);
-		i++;
 	}
 	table->philos = sopher;
 	return (0);
