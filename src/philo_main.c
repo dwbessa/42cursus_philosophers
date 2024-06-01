@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:59:37 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 13:44:24 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 15:28:24 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int ac, char **av)
 				if (check_life(table.philos[i], &table))
 				{
 					dinner = false;
-					return (0);
+					table.end_simulation = true;
+					break ;
 				}
 			}
 			usleep(1000);
@@ -41,8 +42,7 @@ int	main(int ac, char **av)
 		clean(&table);
 	}
 	else
-	{
 		error_exit(BLINK"🚨 Wrong number of arguments\n" RST
 			GREEN"Correct is ./philo 5 800 200 200 [5]\n" RST);
-	}
+	return (0);
 }
