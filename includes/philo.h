@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:48:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/05/31 15:04:59 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 13:13:31 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
-# include <stdbool.h>
 # include <limits.h>
 
 # define RED	"\x1b[31m"
@@ -31,6 +30,12 @@
 typedef pthread_mutex_t	t_mtx;
 typedef struct s_table	t_table;
 
+typedef enum e_bool
+{
+	false = 0,
+	true = 1,
+}	t_bool;
+
 typedef struct s_fork
 {
 	t_mtx	fork;
@@ -41,8 +46,8 @@ typedef struct s_philo
 {
 	int			id;
 	long		diner_counter;
-	bool		full;
 	long		last_meal_time;
+	t_bool		full;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	pthread_t	thread_id;
@@ -57,16 +62,28 @@ struct s_table
 	long	time_to_sleep;
 	long	nbr_limit_meals;
 	long	start_simulation;
-	bool	end_simulation;
+	t_bool	end_simulation;
 	t_fork	*forks;
 	t_philo	*philos;
 };
+
+typedef enum e_status
+{
+	EAT,
+	SLEEP,
+	THINK,
+	FORK,
+	DEAD
+}	t_status;
 
 void	error_exit(const char *error_msg);
 void	parse_input(t_table *table, char **av);
 int		data_init(t_table *table);
 long	get_time(void);
-void	*dinner_start(t_table *table);
+void	*dinner(void *table);
 long	clean(t_table *table);
+void	print_status(t_philo *philo, t_status status);
+int		dinner_start(t_table *table);
+int		check_life(t_philo philo, t_table *table);
 
 #endif
