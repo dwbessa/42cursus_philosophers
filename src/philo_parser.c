@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:01:23 by dbessa            #+#    #+#             */
-/*   Updated: 2024/05/30 15:27:18 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:06:28 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static long	ft_atol(const char *nptr)
 	return (res * sign);
 }
 
-int	ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
@@ -73,11 +73,8 @@ void	validate_input(char **av)
 		while (av[check][j] != '\0')
 		{
 			if (!ft_isdigit(av[check][j]))
-			{
-				printf("%s\n", av[check]);
-				error_exit("🚨 Only digits are acceptable\n"
+				error_exit(BLINK"🚨 Only digits are acceptable\n"RST
 					GREEN"Correct is ./philo 5 800 200 200 [5]\n" RST);
-			}
 			j++;
 		}
 		check++;
@@ -86,16 +83,14 @@ void	validate_input(char **av)
 
 void	parse_input(t_table *table, char **av)
 {
-	struct timeval	time;
-
 	validate_input(av);
-	table->philo_nbr = ft_atol(av[1]);
+	table->phi_nbr = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
 	table->nbr_limit_meals = -1;
 	if (av[5] != NULL)
 		table->nbr_limit_meals = ft_atol(av[5]);
-	gettimeofday(&time, NULL);
-	table->start_simulation = time.tv_usec;
+	table->end_simulation = false;
+	table->start_simulation = get_time();
 }

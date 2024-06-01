@@ -6,8 +6,13 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:29:17 by dbessa            #+#    #+#             */
-/*   Updated: 2024/05/30 16:29:21 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:03:20 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long	clean(t_table *table)
+{
+	return (table->phi_nbr);
+}

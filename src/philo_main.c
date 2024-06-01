@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:59:37 by dbessa            #+#    #+#             */
-/*   Updated: 2024/05/30 16:28:07 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:00:27 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,14 @@ int	main(int ac, char **av)
 
 	if (ac == 5 || ac == 6)
 	{
-		//✅ correct input
-		//1) errors checking
 		parse_input(&table, av);
-
-		//2) creating the thing
 		data_init(&table);
-
-		//3) the dinner
-		//dinner_start(&table);
-
-		//4) No leaks
-		//clean(&table);
+		dinner_start(&table);
+		clean(&table);
 	}
 	else
 	{
-		error_exit("🚨 Wrong number of arguments\n"
+		error_exit(BLINK"🚨 Wrong number of arguments\n" RST
 			GREEN"Correct is ./philo 5 800 200 200 [5]\n" RST);
 	}
 }
