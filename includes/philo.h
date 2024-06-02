@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:48:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 17:34:53 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 22:36:53 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ void	*dinner(void *table);
 long	clean(t_table *table);
 void	print_status(t_philo *philo, t_status status);
 int		dinner_start(t_table *table);
-int		check_life(t_philo philo, t_table *table);
+int		check_life(t_table *table);
 void	eat(t_philo *philo);
 void	nap(t_philo *philo);
 void	think(t_philo *philo);
+void	monitor_threads(t_table *table);
 
 #endif

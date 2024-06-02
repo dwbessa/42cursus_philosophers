@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:59:37 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 19:53:07 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 22:36:16 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	int		i;
 	t_table	table;
-	t_bool	dinner;
 
-	i = -1;
-	dinner = true;
-	pthread_mutex_init(&table.mutex, NULL);
 	pthread_mutex_init(&table.print_mtx, NULL);
+	pthread_mutex_init(&table.mutex, NULL);
 	if (ac == 5 || ac == 6)
 	{
 		parse_input(&table, av);
 		data_init(&table);
-		while (dinner && !table.end_simulation)
-		{
-			i = -1;
-			while (++i < table.phi_nbr)
-			{
-				if (check_life(table.philos[i], &table))
-				{
-					dinner = false;
-					table.end_simulation = true;
-					break ;
-				}
-			}
-			usleep(1000);
-		}
 		dinner_start(&table);
 		clean(&table);
 	}
@@ -47,4 +29,28 @@ int	main(int ac, char **av)
 		error_exit(BLINK"🚨 Wrong number of arguments\n" RST
 			GREEN"Correct is ./philo 5 800 200 200 [5]\n" RST);
 	return (0);
+}
+
+void	monitor_threads(t_table *table)
+{
+	int		i;
+	t_bool	dinner;
+
+	dinner = true;
+	while (dinner && !table->end_simulation)
+	{
+		i = -1;
+		while (++i < table->phi_nbr)
+		{
+			if (check_life(table))
+			{
+				dinner = false;
+				pthread_mutex_lock(&table->mutex);
+				table->end_simulation = true;
+				pthread_mutex_unlock(&table->mutex);
+				break ;
+			}
+		}
+		usleep(1000);
+	}
 }
