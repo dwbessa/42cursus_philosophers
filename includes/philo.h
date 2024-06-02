@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:48:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 22:36:53 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/02 18:28:59 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct s_table
 	long	time_to_sleep;
 	long	nbr_limit_meals;
 	long	start_simulation;
+	t_bool	threads_ready;
 	t_bool	end_simulation;
 	t_fork	*forks;
 	t_mtx	mutex;
@@ -91,5 +92,12 @@ void	eat(t_philo *philo);
 void	nap(t_philo *philo);
 void	think(t_philo *philo);
 void	monitor_threads(t_table *table);
+void	precise_usleep(long usec, t_table *table);
+void	lone_philo(t_table *table);
+t_bool	is_all_full(t_philo *philo);
+t_bool	get_bool(t_table *table, t_bool *value);
+void	set_bool(t_table *table, t_bool *dest, t_bool value);
+void	synchro_philos(t_philo *philo);
+void	wait_all_threads(t_table *table);
 
 #endif

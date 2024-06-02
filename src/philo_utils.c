@@ -47,7 +47,7 @@ void	print_status(t_philo *philo, t_status status)
 	if (status == FORK)
 		printf("%ld\t%d has taken a fork\n", now, philo->id);
 	if (status == EAT)
-		printf("%ld\t%d is eating\n", now, philo->id);
+		printf(GREEN"%ld\t%d is eating\n"RST, now, philo->id);
 	if (status == THINK)
 		printf("%ld\t%d is thinking\n", now, philo->id);
 	pthread_mutex_unlock(&philo->table->print_mtx);

@@ -89,6 +89,7 @@ void	parse_input(t_table *table, char **av)
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
 	table->nbr_limit_meals = -1;
+	table->threads_ready = false;
 	if (av[5] != NULL)
 		table->nbr_limit_meals = ft_atol(av[5]);
 	table->end_simulation = false;

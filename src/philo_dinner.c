@@ -12,81 +12,62 @@
 
 #include "philo.h"
 
-t_bool	is_all_full(t_philo *philo)
-{
-	int		i;
-	t_bool	ret;
-
-	i = -1;
-	ret = false;
-	while (++i < philo->table->phi_nbr)
-	{
-		if (philo[i].full == true)
-			ret = true;
-		else
-			return (false);
-	}
-	return (ret);
-}
-
-int	check_life(t_table *table)
-{
-	long	now;
-	t_philo	*philo;
-
-	philo = table->philos;
-	pthread_mutex_lock(&table->mutex);
-	now = get_time() - table->start_simulation - philo->last_meal_time;
-	pthread_mutex_unlock(&table->mutex);
-	if (now > table->time_to_die)
-	{
-		pthread_mutex_lock(&table->mutex);
-		table->end_simulation = true;
-		pthread_mutex_unlock(&table->mutex);
-		if (!is_all_full(table->philos))
-			print_status(philo, DEAD);
-		return (-1);
-	}
-	return (0);
-}
-
-void	*dinner(void *arg)
-{
-	t_table	*tab;
-	t_philo	*phi;
-
-	phi = (t_philo *)arg;
-	tab = phi->table;
-	if (tab->phi_nbr % 2 != 0 && phi->id == tab->phi_nbr)
-		usleep(200000);
-	if (phi->id % 2 == 0)
-		usleep(150000);
-	pthread_mutex_lock(&tab->mutex);
-	while (!tab->end_simulation && !phi->full && !is_all_full(phi))
-	{
-		pthread_mutex_unlock(&tab->mutex);
-		eat(phi);
-		nap(phi);
-		think(phi);
-		pthread_mutex_lock(&tab->mutex);
-	}
-	pthread_mutex_unlock(&tab->mutex);
-	return (0);
-}
-
 int	dinner_start(t_table *table)
 {
 	t_philo	*philo;
 	int		i;
 
-	i = 0;
+	i = -1;
 	philo = table->philos;
+	set_bool(table, &table->threads_ready, true);
+	if (table->nbr_limit_meals == 0)
+		return (0);
+	else if (table->phi_nbr == 1)
+	{
+		lone_philo(table);
+		return (0);
+	}
 	monitor_threads(table);
-	while (i < table->phi_nbr)
+	while (++i < table->phi_nbr)
 	{
 		if (pthread_join(philo[i].thread_id, NULL))
 			return (-1);
-		i++;
 	}
 	return (0);
+}
+
+void	set_bool(t_table *table, t_bool *dest, t_bool value)
+{
+	pthread_mutex_lock(&table->mutex);
+	*dest = value;
+	pthread_mutex_unlock(&table->mutex);
+}
+
+t_bool	get_bool(t_table *table, t_bool *value)
+{
+	t_bool	ret;
+
+	pthread_mutex_lock(&table->mutex);
+	ret = *value;
+	pthread_mutex_unlock(&table->mutex);
+	return (ret);
+}
+void	wait_all_threads(t_table *table)
+{
+	while (get_bool(table, &table->threads_ready))
+		;
+}
+
+void	synchro_philos(t_philo *philo)
+{
+	if (philo->table->phi_nbr % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			usleep(3e4);
+	}
+	else
+	{
+		if (philo->id % 2)
+			think(philo);
+	}
 }
