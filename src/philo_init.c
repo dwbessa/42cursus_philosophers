@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:29:00 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 20:47:26 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/01 22:50:44 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	init_forks(t_table *table)
 	{
 		if (pthread_mutex_init(&fork_list[i].fork, NULL))
 			return (-1);
-		fork_list->fork_id = i + 1;
+		fork_list[i].fork_id = i + 1;
 		i++;
 	}
 	table->forks = fork_list;
