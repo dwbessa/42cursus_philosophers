@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 14:02:43 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 22:49:17 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:24:44 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->table->mutex);
 	philo->last_meal_time = get_time() - philo->table->start_simulation;
 	pthread_mutex_unlock(&philo->table->mutex);
-	usleep(philo->table->time_to_eat * 1000);
+	smart_usleep(philo->table, (philo->table->time_to_eat));
 	pthread_mutex_unlock(&first_fork->fork);
 	pthread_mutex_unlock(&second_fork->fork);
 }
@@ -53,7 +53,7 @@ void	eat(t_philo *philo)
 void	nap(t_philo *philo)
 {
 	print_status(philo, SLEEP);
-	usleep(philo->table->time_to_sleep * 1000);
+	smart_usleep(philo->table, philo->table->time_to_sleep);
 }
 
 void	think(t_philo *philo)

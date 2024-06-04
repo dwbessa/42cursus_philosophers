@@ -6,15 +6,33 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:01:23 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 22:30:40 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:29:02 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+long	time_diff(long past, long pres)
+{
+	return ((pres - past) * 1000);
+}
+
+void	smart_usleep(t_table *t, long time)
+{
+	long	past;
+
+	past = (get_time() - t->start_simulation);
+	while (!t->end_simulation)
+	{
+		if (time_diff(past, (get_time() - t->start_simulation)) >= time)
+			break ;
+		usleep(42);
+	}
+}
+
 void	error_exit(const char *error_msg)
 {
-	printf(RED "%s\n" RST, error_msg);
+	printf(RED"%s\n"RST, error_msg);
 	exit(EXIT_FAILURE);
 }
 

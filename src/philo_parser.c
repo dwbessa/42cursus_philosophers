@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:01:23 by dbessa            #+#    #+#             */
-/*   Updated: 2024/05/31 15:06:28 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:25:00 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	parse_input(t_table *table, char **av)
 	validate_input(av);
 	table->phi_nbr = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]);
-	table->time_to_eat = ft_atol(av[3]);
-	table->time_to_sleep = ft_atol(av[4]);
+	table->time_to_eat = ft_atol(av[3]) * 1000;
+	table->time_to_sleep = ft_atol(av[4]) * 1000;
 	table->nbr_limit_meals = -1;
 	table->threads_ready = false;
 	if (av[5] != NULL)

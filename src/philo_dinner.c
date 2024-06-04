@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:29:51 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 22:38:56 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:05:45 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_bool	get_bool(t_table *table, t_bool *value)
 	pthread_mutex_unlock(&table->mutex);
 	return (ret);
 }
+
 void	wait_all_threads(t_table *table)
 {
 	while (get_bool(table, &table->threads_ready))
@@ -63,7 +64,7 @@ void	synchro_philos(t_philo *philo)
 	if (philo->table->phi_nbr % 2 == 0)
 	{
 		if (philo->id % 2 == 0)
-			usleep(3e4);
+			smart_usleep(philo->table, 3e4);
 	}
 	else
 	{

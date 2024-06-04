@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_dinner.c                                     :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:29:51 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/01 22:38:56 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:14:16 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,9 @@ void	*mr_lonely(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	print_status(philo, FORK);
 	pthread_mutex_lock(&philo->table->mutex);
 	while (philo->table->end_simulation)
-		usleep(300);
+		smart_usleep(philo->table, philo->table->time_to_die);
 	pthread_mutex_unlock(&philo->table->mutex);
 	return (NULL);
 }

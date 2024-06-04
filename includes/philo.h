@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 20:48:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/06/02 18:28:59 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/06/04 11:38:03 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ t_bool	get_bool(t_table *table, t_bool *value);
 void	set_bool(t_table *table, t_bool *dest, t_bool value);
 void	synchro_philos(t_philo *philo);
 void	wait_all_threads(t_table *table);
+void	smart_usleep(t_table *t, long time);
 
 #endif
