@@ -57,12 +57,7 @@ void	*dinner(void *arg)
 
 	phi = (t_philo *)arg;
 	tab = phi->table;
-	//wait_all_threads(tab);
 	synchro_philos(phi);
-//	if (tab->phi_nbr % 2 != 0 && phi->id == tab->phi_nbr)
-//		usleep(200000);
-//	if (phi->id % 2 == 0)
-//		usleep(150000);
 	pthread_mutex_lock(&tab->mutex);
 	while (!tab->end_simulation && !phi->full && !is_all_full(phi))
 	{
