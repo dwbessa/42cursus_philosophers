@@ -22,7 +22,7 @@ void	smart_usleep(t_table *t, long time)
 	long	past;
 
 	past = (get_time() - t->start_simulation);
-	while (!t->end_simulation)
+	while (!get_bool(t, &t->end_simulation))
 	{
 		if (time_diff(past, (get_time() - t->start_simulation)) >= time)
 			break ;
