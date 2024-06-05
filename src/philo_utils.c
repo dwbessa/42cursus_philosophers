@@ -26,7 +26,7 @@ void	smart_usleep(t_table *t, long time)
 	{
 		if (time_diff(past, (get_time() - t->start_simulation)) >= time)
 			break ;
-		usleep(42);
+		usleep(1000);
 	}
 }
 
