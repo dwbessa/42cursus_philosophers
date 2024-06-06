@@ -23,7 +23,7 @@ Follow these steps to set up the project locally:
 1. **Clone the Repository:**
    ```bash
    git clone git@github.com:dwbessa/42cursus_philosophers.git
-   cd philo
+   cd 42cursus_philosophers && cd philo
    make
    ```
 
